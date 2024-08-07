@@ -1,62 +1,35 @@
-// you can overwrite this entire file with your v0 Component.
-// just copy and paste the "React" output over the entire file.
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/nbolcePz9n5
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+"use client"
 
-import Link from "next/link";
-import React from "react";
-import {V0Logo} from "./symbols";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
 
-function TestComponent() {
+export default function Component() {
+  const [backgroundColor, setBackgroundColor] = useState("")
+  const [text, setText] = useState("")
+  const generateRandomImage = () => {
+    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+    setBackgroundColor(randomColor)
+    setText(`Random Image ${Math.floor(Math.random() * 100)}`)
+  }
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100%",
-        justifyContent: "space-between",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
-      <h3
-        style={{
-          maxWidth: "11em",
-        }}
-      >
-        This would be a pretty good place for a{" "}
-        <Link href="https://v0.dev/" target="_blank" rel="noopener noreferrer">
-          v0 component
-        </Link>
-        , wouldn't it?
-      </h3>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          width: "100%",
-        }}
-      >
-        <p
-          style={{
-            maxWidth: "20em",
-          }}
-        >
-          Go make one, then paste it into{" "}
-          <code
-            style={{
-              fontFamily: "var(--font-geist-mono)",
-              fontWeight: 500,
-              fontSize: "0.95em",
-              fontFeatureSettings: "'ss09'",
-            }}
-          >
-            app/components/MyV0Component.tsx
-          </code>
-        </p>
-
-        <V0Logo />
+    <div className="flex flex-col items-center justify-center gap-4">
+      <div className={`relative w-full max-w-md overflow-hidden rounded-lg aspect-video bg-[${backgroundColor}]`}>
+        <img
+          src="/placeholder.svg"
+          alt={text}
+          width={800}
+          height={450}
+          className="object-cover w-full h-full"
+          style={{ aspectRatio: "800/450", objectFit: "cover" }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white">{text}</div>
       </div>
+      <Button className="text-3xl">Generate New Image</Button>
     </div>
-  );
+  )
 }
-
-export default TestComponent;
